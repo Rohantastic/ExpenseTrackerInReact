@@ -45,7 +45,7 @@ const ProfileUpdationPage = () => {
     return (
         <>
             <Header />
-
+            
             <div className="profile-updation-form">
                 <h2>Profile Updation</h2>
                 <form onSubmit={handleSubmit}>
