@@ -65,6 +65,8 @@ const LoginPage = () => {
                     <button onClick={handleLogin}>Login</button>
                     <br/>
                     <NavLink to="/">Don't have an account?</NavLink>
+                    <br/>
+                    <NavLink to="/forgotPassword">Forgot Password?</NavLink>
                 </div>
             </div>
             <Footer />
