@@ -22,16 +22,55 @@ const Home = () => {
         });
     };
 
-    const handleExpenseSubmit = (e) => {
+    const handleExpenseSubmit = async (e) => {
         e.preventDefault();
-        setExpenses([...expenses,expenseData]);
+    
+        try {
+            const response = await fetch("https://expense-tracker-7fa84-default-rtdb.firebaseio.com/expensetracker.json", {
+                method: "POST",
+                body: JSON.stringify({
+                    category: expenseData.category,
+                    money: expenseData.moneySpent,
+                    description: expenseData.description,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (response.ok) {
+                
+                console.log("Expense data sent to Firebase.");
+            } else {
+                const errorData = await response.json();
+                console.error("Error sending expense data to Firebase: " + JSON.stringify(errorData));
+            }
+        } catch (err) {
+            console.error("An error occurred:", err);
+        }
+    };
 
-        setExpenseData({
-            moneySpent: "",
-            description: "",
-            category: "Food",
-        });
-        console.log("Expense data:", expenseData);
+    const fetchExpenses = async () => {
+        try {
+            const response = await fetch("https://expense-tracker-7fa84-default-rtdb.firebaseio.com/expensetracker.json");
+            if (response.ok) {
+                const data = await response.json();
+                if (data) {
+                    // Convert Firebase data object to an array
+                    const expensesArray = Object.keys(data).map((key) => ({
+                        id: key,
+                        ...data[key],
+                    }));
+                    setExpenses(expensesArray);
+                } else {
+                    setExpenses([]); // No expenses in Firebase
+                }
+            } else {
+                console.error("Error fetching expenses from Firebase");
+            }
+        } catch (err) {
+            console.error("An error occurred while fetching expenses:", err);
+        }
     };
 
     useEffect(() => {
@@ -40,6 +79,7 @@ const Home = () => {
                 setShowNotification(false);
             }, 5000);
         }
+        fetchExpenses();
     }, [showNotification]);
 
     const handleVerifyEmail = async () => {
@@ -80,8 +120,6 @@ const Home = () => {
             )}
 
             <button onClick={handleVerifyEmail}>Verify Email</button>
-
-            {/* Expense Entry Form */}
             <form className="form-container" onSubmit={handleExpenseSubmit}>
                 <h2>Expense Entry</h2>
                 <label>
@@ -128,12 +166,12 @@ const Home = () => {
                 <ul>
                     {expenses.map((expense, index) => (
                         <li key={index}>
-                            <strong>Category:</strong> {expense.category}, <strong>Money Spent:</strong> ${expense.moneySpent}, <strong>Description:</strong> {expense.description}
+                            <strong>Category:</strong> {expense.category}, <strong>Money Spent:</strong> ${expense.money}, <strong>Description:</strong> {expense.description}
                         </li>
                     ))}
                 </ul>
             </div>
-            
+
             <Footer />
         </>
     );
