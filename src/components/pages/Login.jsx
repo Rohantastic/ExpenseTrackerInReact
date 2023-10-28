@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from "../common/Header";
 import Footer from "../common/Footer";
-import "./Signup.css";
+import "./Login.css";
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -9,14 +9,13 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const navigateToLogin = ()=>{
-        navigate("/login");
+    const navigateToHomePage = ()=>{
+        navigate("/home");
     }
-
     const handleLogin = async () => {
 
         try {
-            const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCC0VjOlGiP9AhJi_tof2grQMe-B0T1-lU", {
+            const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCC0VjOlGiP9AhJi_tof2grQMe-B0T1-lU", {
                 method: "POST",
                 body: JSON.stringify({
                     email: email,
@@ -28,9 +27,10 @@ const LoginPage = () => {
             });
 
             if (response.ok) {
-                console.log(response);
-                alert("User has been created !!");
-                navigateToLogin();
+                //const data = await response.json();
+                //const idToken = data.idToken;
+                alert("User has been successfully logged in !!");
+                navigateToHomePage();
             } else {
                 alert("Problem is user Creation")
             }
@@ -46,7 +46,7 @@ const LoginPage = () => {
             <Header />
             <div className="login-container">
                 <div className="login-form">
-                    <h2>SignUp</h2>
+                    <h2>Login</h2>
                     <input
                         type="email"
                         placeholder="Email"
@@ -61,9 +61,9 @@ const LoginPage = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button onClick={handleLogin}>Signup</button>
+                    <button onClick={handleLogin}>Login</button>
                     <br/>
-                    <NavLink to="/login">Already have an account?</NavLink>
+                    <NavLink to="/">Don't have an account?</NavLink>
                 </div>
             </div>
             <Footer />
