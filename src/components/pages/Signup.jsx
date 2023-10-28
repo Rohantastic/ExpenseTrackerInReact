@@ -11,7 +11,7 @@ const LoginPage = () => {
     const handleLogin = async () => {
 
         try {
-            const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3QXuWLXotdtPsh5kedc-Bo3j283kD6T8", {
+            const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCC0VjOlGiP9AhJi_tof2grQMe-B0T1-lU", {
                 method: "POST",
                 body: JSON.stringify({
                     email: email,
@@ -23,6 +23,7 @@ const LoginPage = () => {
             });
 
             if (response.ok) {
+                console.log(response);
                 alert("User has been created !!");
             } else {
                 alert("Problem is user Creation")
