@@ -27,8 +27,9 @@ const LoginPage = () => {
             });
 
             if (response.ok) {
-                //const data = await response.json();
-                //const idToken = data.idToken;
+                const data = await response.json();
+                const idToken = data.idToken;
+                localStorage.setItem("idToken",idToken);
                 alert("User has been successfully logged in !!");
                 navigateToHomePage();
             } else {

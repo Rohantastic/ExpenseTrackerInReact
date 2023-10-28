@@ -1,0 +1,52 @@
+.profile-updation-form {
+    max-width: 400px;
+    margin: 50px auto 0 auto; /* Added top margin of 50px */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .profile-updation-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .profile-updation-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-updation-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .profile-updation-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .profile-updation-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .profile-updation-form button:hover {
+    background-color: #0056b3;
+  }
+  
