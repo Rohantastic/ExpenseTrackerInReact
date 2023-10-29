@@ -6,12 +6,12 @@ import Footer from '../common/Footer';
 
 const Home = () => {
     const [showNotification, setShowNotification] = useState(true);
-    const [expenses,setExpenses] = useState([]);
+    const [expenses, setExpenses] = useState([]);
 
     const [expenseData, setExpenseData] = useState({
         moneySpent: "",
         description: "",
-        category: "Food", 
+        category: "Food",
     });
 
     const handleExpenseChange = (e) => {
@@ -24,7 +24,7 @@ const Home = () => {
 
     const handleExpenseSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch("https://expense-tracker-7fa84-default-rtdb.firebaseio.com/expensetracker.json", {
                 method: "POST",
@@ -37,9 +37,9 @@ const Home = () => {
                     'Content-Type': 'application/json',
                 },
             });
-    
+
             if (response.ok) {
-                
+
                 console.log("Expense data sent to Firebase.");
             } else {
                 const errorData = await response.json();
@@ -56,14 +56,13 @@ const Home = () => {
             if (response.ok) {
                 const data = await response.json();
                 if (data) {
-                    // Convert Firebase data object to an array
                     const expensesArray = Object.keys(data).map((key) => ({
                         id: key,
                         ...data[key],
                     }));
                     setExpenses(expensesArray);
                 } else {
-                    setExpenses([]); // No expenses in Firebase
+                    setExpenses([]);
                 }
             } else {
                 console.error("Error fetching expenses from Firebase");
@@ -105,6 +104,28 @@ const Home = () => {
             console.log(err);
         }
     };
+
+    const handleDeleteExpense = async (expenseId) => {
+        try {
+            const response = await fetch(`https://expense-tracker-7fa84-default-rtdb.firebaseio.com/expensetracker/${expenseId}.json`, {
+                method: "DELETE",
+            });
+    
+            if (response.ok) {
+                // Expense has been deleted, update the expense list
+                fetchExpenses();
+            } else {
+                const errorData = await response.json();
+                console.error("Error deleting expense: " + JSON.stringify(errorData));
+            }
+        } catch (err) {
+            console.error("An error occurred while deleting the expense:", err);
+        }
+    };
+
+    const handleEditExpense = ()=>{
+            //work on this code !!
+    }       
 
     return (
         <>
@@ -154,19 +175,21 @@ const Home = () => {
                         <option value="Food">Food</option>
                         <option value="Petrol">Petrol</option>
                         <option value="Salary">Salary</option>
-                        
+
                     </select>
                 </label>
                 <br />
                 <button type="submit">Submit Expense</button>
             </form>
-            
+
             <div className="expense-list">
                 <h2>Expenses</h2>
                 <ul>
                     {expenses.map((expense, index) => (
                         <li key={index}>
                             <strong>Category:</strong> {expense.category}, <strong>Money Spent:</strong> ${expense.money}, <strong>Description:</strong> {expense.description}
+                            <button onClick={() => handleEditExpense(expense.id)}>Edit</button>
+                            <button onClick={() => handleDeleteExpense(expense.id)}>Delete</button>
                         </li>
                     ))}
                 </ul>
