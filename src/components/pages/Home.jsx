@@ -3,16 +3,24 @@ import { Link } from 'react-router-dom';
 import "./Home.css";
 import Header from '../common/Header';
 import Footer from '../common/Footer';
+import { expenseActions } from '../../store/ExpenseReducer';
+import { useDispatch } from 'react-redux';
 
 const Home = () => {
     const [showNotification, setShowNotification] = useState(true);
     const [expenses, setExpenses] = useState([]);
-
+    var change = 0; //this is just to provike useEffect
     const [expenseData, setExpenseData] = useState({
         moneySpent: "",
         description: "",
         category: "Food",
     });
+
+    useEffect(()=>{
+
+    },[expenses,change]);
+
+    const dispatch = useDispatch();
 
     const handleExpenseChange = (e) => {
         const { name, value } = e.target;
@@ -39,7 +47,7 @@ const Home = () => {
             });
 
             if (response.ok) {
-
+                change++;
                 console.log("Expense data sent to Firebase.");
             } else {
                 const errorData = await response.json();
@@ -112,7 +120,6 @@ const Home = () => {
             });
     
             if (response.ok) {
-                // Expense has been deleted, update the expense list
                 fetchExpenses();
             } else {
                 const errorData = await response.json();
@@ -124,9 +131,20 @@ const Home = () => {
     };
 
     const handleEditExpense = ()=>{
-            //work on this code !!
+            
     }       
 
+
+    var expenseAmountCount = 0;
+    for(var i = 0 ; i < expenses.length ; i++){
+        expenseAmountCount += +expenses[i].money;
+    }
+
+
+    if(expenseAmountCount>=1000){
+        dispatch(expenseActions.activatePremium());
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     return (
         <>
             <Header />

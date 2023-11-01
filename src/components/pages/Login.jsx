@@ -3,11 +3,19 @@ import Header from "../common/Header";
 import Footer from "../common/Footer";
 import "./Login.css";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/AuthReducer';
+
 
 const LoginPage = () => {
+     
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
 
     const navigateToHomePage = ()=>{
         navigate("/home");
@@ -31,6 +39,8 @@ const LoginPage = () => {
                 const idToken = data.idToken;
                 localStorage.setItem("idToken",idToken);
                 alert("User has been successfully logged in !!");
+                dispatch(authActions.authToken(data.idToken));
+                dispatch(authActions.loggedIn());
                 navigateToHomePage();
             } else {
                 alert("Problem is user Creation")
