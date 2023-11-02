@@ -15,9 +15,9 @@ const Home = () => {
         category: "Food",
     });
 
-    useEffect(() => {
+    // useEffect(() => {
         
-    }, []);
+    // }, []);
     const dispatch = useDispatch();
 
     const handleExpenseChange = (e) => {
@@ -47,6 +47,7 @@ const Home = () => {
 
             if (response.ok) {
                 console.log("Expense data sent to Firebase.");
+                await fetchExpenses();
             } else {
                 const errorData = await response.json();
                 console.error("Error sending expense data to Firebase: " + JSON.stringify(errorData));
@@ -55,6 +56,10 @@ const Home = () => {
             console.error("An error occurred:", err);
         }
     };
+
+
+    
+
 
     const fetchExpenses = async () => {
         try {
