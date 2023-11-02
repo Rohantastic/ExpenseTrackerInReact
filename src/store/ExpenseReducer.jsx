@@ -15,6 +15,9 @@ const expenseSlice = createSlice({
         },
         activatePremium(state){
             state.premiumButton = true;
+        },
+        deactivatePremium(state){
+            state.premiumButton = false;
         }
     }
 });

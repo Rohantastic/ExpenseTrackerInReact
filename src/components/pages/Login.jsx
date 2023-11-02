@@ -13,7 +13,6 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
 
@@ -38,6 +37,15 @@ const LoginPage = () => {
                 const data = await response.json();
                 const idToken = data.idToken;
                 localStorage.setItem("idToken",idToken);
+                localStorage.setItem("emailExpenser",email);
+                console.log("data", idToken);
+
+                if(data.profilePicture){
+                    localStorage.setItem("isProfileUpdated",true);
+                }else{
+                    localStorage.setItem("isProfileUpdated",false);
+                }
+                
                 alert("User has been successfully logged in !!");
                 dispatch(authActions.authToken(data.idToken));
                 dispatch(authActions.loggedIn());
@@ -54,7 +62,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <Header />
+            
             <div className="login-container">
                 <div className="login-form">
                     <h2>Login</h2>

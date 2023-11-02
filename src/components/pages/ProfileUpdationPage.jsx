@@ -20,7 +20,8 @@ const ProfileUpdationPage = () => {
                 body: JSON.stringify({
                     idToken: localStorage.getItem("idToken"),
                     displayName: fullName, 
-                    photoUrl: profileUrl,  
+                    photoUrl: profileUrl,
+                    "premiumUser": false  
                 }),
                 headers: {
                     'Content-Type': 'application/json',

@@ -18,41 +18,44 @@
     font-size: 16px;
     margin-left: 10px;
   }
-  
-  /* Add this to your Home.css file or create a separate CSS file for the form */
+
+
+  /*----------------------------------------------------------------------------------------------------*/
+
+
 .form-container {
-  max-width: 400px;
-  margin: 0 auto;
+  width: 80vw;
+  margin: auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  box-shadow: 10px 10px lightblue;
+  background-color: #bfb4b4;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5vw;
+
 }
 
 .form-container h2 {
   text-align: center;
+  padding-right: 21px ;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.form-container label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
 
 .form-container input[type="text"],
 .form-container input[type="number"],
 .form-container select {
-  width: 100%;
+  width: 50%;
   padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .form-container button[type="submit"] {
-  width: 100%;
+  width: 20%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: lightblue;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -60,29 +63,59 @@
 }
 
 .form-container button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: rgb(84, 141, 160);
 }
 
+
+/*----------------------------------------------------------------------------------------------------*/
+
+
 .expense-list {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 80vw;
+  margin-left: 5vw;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
   margin-top: 20px; 
+  color: grey;
 }
 
 .expense-list h2 {
   text-align: center;
+  color: black;
 }
 
 .expense-list ul {
   list-style: none;
   padding: 0;
+  text-align: center;
 }
 
 .expense-list li {
-  margin-bottom: 10px;
+   
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid rgb(84, 141, 160);;
+  border-radius: 5px;
+  background-color: #f9f9f9;
   font-weight: bold;
+}
+
+.expense-list li strong {
+  display: block; 
+}
+
+.expense-list strong{
+  color: rgb(108, 133, 142);
+}
+
+
+.expense-delete-button{
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+}
+
+.expense-delete-button:hover{
+  background-color: rgb(141, 184, 198);
 }

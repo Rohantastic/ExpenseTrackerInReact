@@ -43,7 +43,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <Header />
+            
             <div className="login-container">
                 <div className="login-form">
                     <h2>SignUp</h2>

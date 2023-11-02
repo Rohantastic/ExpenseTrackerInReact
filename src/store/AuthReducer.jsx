@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     loggedInStatus: false,
-    token : null
+    token : null,
+    emailVerified : false
 }
 
 const authSlice = createSlice({
@@ -17,6 +18,9 @@ const authSlice = createSlice({
         },
         authToken(state,action){
             state.token = action.payload; 
+        },
+        isEmailVerified(state){
+            state.emailVerified = !state.emailVerified;
         }
     }
 });
